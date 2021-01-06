@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "CovidTestOutlookCollector": {
+      "commandName": "Project",
+      "sqlDebugging": false,
+      "nativeDebugging": false
+    }
+  }
+}
