@@ -29,6 +29,7 @@ namespace CovidTestOutlookCollector
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CovidTestOutlookCollector));
             this.Auswertung = new System.Windows.Forms.Button();
             this.LogOutput = new System.Windows.Forms.RichTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -60,6 +61,7 @@ namespace CovidTestOutlookCollector
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.LogOutput);
             this.Controls.Add(this.Auswertung);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CovidTestOutlookCollector";
             this.Text = "CovidTestOutlookCollector";
             this.ResumeLayout(false);
