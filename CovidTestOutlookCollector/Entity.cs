@@ -24,6 +24,9 @@ namespace CovidTestOutlookCollector
         public string Result { get; set; }
         public string PdfPath { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Birthdate { get; set; }
 
         // This could also go wrong sometime due to too much memory allocation
         private Storage.Attachment attachment { get; set; }
@@ -44,6 +47,7 @@ namespace CovidTestOutlookCollector
             Surname = new Regex(@"(?<=\bLastname\s)(\w+)").Match(text).Value;
             Forename = new Regex(@"(?<=\bFirstname\s)(\w+)").Match(text).Value;
             Gender = new Regex(@"(?<=\bSex\s)(\w+)").Match(text).Value;
+            Birthdate = new Regex(@"(?<=\bDate of Birth\s)(.+)").Match(text).Value;
             string tmpResult = new Regex(@"(?<=\bResult:\s)(\w+)").Match(text).Value;
             string tmpBarcode = new Regex(@"(?<=\bBarcode\/ Barcode\s)(\w+)").Match(text).Value;
             string tmpSampling = new Regex(@"(?<=\bSampling\s)(.+)").Match(text).Value.Replace("(CET)", "");
@@ -65,6 +69,8 @@ namespace CovidTestOutlookCollector
             {
                 Result = "nicht eindeutig";
             }
+            Address = ReadLine(text, 5);
+            City = ReadLine(text, 6);
             pdf.Close();
 
 
@@ -96,7 +102,10 @@ namespace CovidTestOutlookCollector
                 ws.Cells[1, 4].Value = "Testdatum";
                 ws.Cells[1, 5].Value = "Barcode";
                 ws.Cells[1, 6].Value = "Ergebnis";
-                ws.Cells[1, 7].Value = "Pdf";
+                ws.Cells[1, 7].Value = "Geburtsdatum";
+                ws.Cells[1, 8].Value = "Adresse";
+                ws.Cells[1, 9].Value = "Stadt";
+                ws.Cells[1, 10].Value = "Pdf";
             }
             ws.Cells.AutoFitColumns(15, 50);
 
@@ -107,9 +116,30 @@ namespace CovidTestOutlookCollector
             ws.Cells[row, 4].Value = Sampling.ToString("dd.MM.yyyy");
             ws.Cells[row, 5].Value = Barcode;
             ws.Cells[row, 6].Value = Result;
-            ws.Cells[row, 7].Value = PdfPath;
+            ws.Cells[row, 7].Value = Birthdate;
+            ws.Cells[row, 8].Value = Address;
+            ws.Cells[row, 9].Value = City;
+            ws.Cells[row, 10].Value = PdfPath;
 
             p.Save();
+        }
+
+        private string ReadLine(string text, int lineNumber)
+        {
+            var reader = new StringReader(text);
+
+            string line;
+            int currentLineNumber = 0;
+
+            do
+            {
+                currentLineNumber += 1;
+                line = reader.ReadLine();
+            }
+            while (line != null && currentLineNumber < lineNumber);
+
+            return (currentLineNumber == lineNumber) ? line :
+                                                       string.Empty;
         }
 
 
