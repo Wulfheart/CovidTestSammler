@@ -50,7 +50,7 @@ namespace CovidTestOutlookCollector
             Birthdate = new Regex(@"(?<=\bDate of Birth\s)(.+)").Match(text).Value;
             string tmpResult = new Regex(@"(?<=\bResult:\s)(\w+)").Match(text).Value;
             string tmpBarcode = new Regex(@"(?<=\bBarcode\/ Barcode\s)(\w+)").Match(text).Value;
-            string tmpSampling = new Regex(@"(?<=\bSampling\s)(.+)").Match(text).Value.Replace("(CET)", "");
+            string tmpSampling = new Regex(@"(?<=\bSampling\s)(.+)").Match(text).Value.Replace("(CEST)", "").Replace("(CET)", "");
             if (tmpBarcode != Barcode)
             {
                 pdf.Close();
