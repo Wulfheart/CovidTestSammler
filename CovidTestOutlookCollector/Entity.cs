@@ -45,7 +45,7 @@ namespace CovidTestOutlookCollector
             PdfDocument pdf = new PdfDocument(new PdfReader(ms, new ReaderProperties().SetPassword(System.Text.ASCIIEncoding.ASCII.GetBytes(Password))));
             string text = PdfTextExtractor.GetTextFromPage(pdf.GetFirstPage());
             Surname = new Regex(@"(?<=\bLastname\s)(\w+)").Match(text).Value;
-            Forename = new Regex(@"(?<=\bFirstname\s)(\w+)").Match(text).Value;
+            Forename = new Regex(@"(?<=\bFirst name\s)(\w+)").Match(text).Value;
             Gender = new Regex(@"(?<=\bSex\s)(\w+)").Match(text).Value;
             Birthdate = new Regex(@"(?<=\bDate of Birth\s)(.+)").Match(text).Value;
             string tmpResult = new Regex(@"(?<=\bResult:\s)(\w+)").Match(text).Value;

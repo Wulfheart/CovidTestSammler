@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CovidTestOutlookCollector"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "0.2.2"
 #define MyAppPublisher "Alexander Wulf"
 #define MyAppExeName "CovidTestOutlookCollector.exe"
 
@@ -20,7 +20,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Alex\source\repos\CovidTestSammler\InnoInstaller
-OutputBaseFilename=CovidTestSetup
+OutputBaseFilename={#MyAppName}_{#MyAppVersion}_Setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
