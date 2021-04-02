@@ -48,7 +48,7 @@ namespace CovidTestOutlookCollector
             Forename = new Regex(@"(?<=\bFirst name\s)(\w+)").Match(text).Value;
             Gender = new Regex(@"(?<=\bSex\s)(\w+)").Match(text).Value;
             Birthdate = new Regex(@"(?<=\bDate of Birth\s)(.+)").Match(text).Value;
-            string tmpResult = new Regex(@"(?<=\bResult:\s)(\w+)").Match(text).Value;
+            string tmpResult = new Regex(@"(?<=\bResult:\s)(.*)").Match(text).Value.Split("/")[0].Trim();
             string tmpBarcode = new Regex(@"(?<=\bBarcode\/ Barcode\s)(\w+)").Match(text).Value;
             string tmpSampling = new Regex(@"(?<=\bSampling\s)(.+)").Match(text).Value.Replace("(CEST)", "").Replace("(CET)", "");
             if (tmpBarcode != Barcode)
@@ -57,18 +57,19 @@ namespace CovidTestOutlookCollector
                 throw new Exception("Es ist eine Ungereimtheit aufgetreten zwischen dem Barcode, der aus dem Betreff entnommen wurde, und der, der aus der PDF ausgelesen wurde.");
             }
             Sampling = DateTime.Parse(tmpSampling);
-            if (String.Equals(tmpResult, "negativ", StringComparison.OrdinalIgnoreCase))
-            {
-                Result = "negativ";
-            }
-            else if (String.Equals(tmpResult, "positiv", StringComparison.OrdinalIgnoreCase))
-            {
-                Result = "positiv";
-            }
-            else
-            {
-                Result = "nicht eindeutig";
-            }
+            Result = tmpResult;
+            //if (String.Equals(tmpResult, "negativ", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    Result = "negativ";
+            //}
+            //else if (String.Equals(tmpResult, "positiv", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    Result = "positiv";
+            //}
+            //else
+            //{
+            //    Result = "nicht eindeutig";
+            //}
             Address = ReadLine(text, 5);
             City = ReadLine(text, 6);
             pdf.Close();

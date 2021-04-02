@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CovidTestOutlookCollector"
-#define MyAppVersion "0.2.2"
+#define MyAppVersion "0.3.0"
 #define MyAppPublisher "Alexander Wulf"
 #define MyAppExeName "CovidTestOutlookCollector.exe"
 
