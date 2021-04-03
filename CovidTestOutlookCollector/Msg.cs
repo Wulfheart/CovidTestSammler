@@ -23,7 +23,7 @@ namespace CovidTestOutlookCollector
         {
             Path = path;
             Message = new MsgReader.Outlook.Storage.Message(Path);
-            Regex rx = new Regex(@"(DE)\S*");
+            Regex rx = new Regex(@"(DE).*");
             ID = rx.Match(Message.Subject).Value;
 
             // TODO: Throw error if ID is null

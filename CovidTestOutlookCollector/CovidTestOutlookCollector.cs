@@ -16,6 +16,7 @@ using System.Windows.Forms;
 
 namespace CovidTestOutlookCollector
 {
+
     public partial class CovidTestOutlookCollector : Form
     {
         public CovidTestOutlookCollector()
@@ -179,7 +180,6 @@ namespace CovidTestOutlookCollector
                     {
                         newFiles = new List<string>(Directory.GetFiles(folder));
                         Log($"{newFiles.Count} Dateien gefunden. Wähle PDFs aus.");
-
                     }
                     catch (Exception)
                     {
